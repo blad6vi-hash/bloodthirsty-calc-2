@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blood Loss Calculator</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <main class="card">
+    <h1>Curse of the Bloodthirsty — Calculator</h1>
+
+    <label>
+      Base damage:
+      <input id="baseDamage" type="number" step="0.01" value="13.5"/>
+    </label>
+
+    <label>
+      Attack type:
+      <select id="attackType">
+        <option value="Slash">Slash (M = 1)</option>
+        <option value="Blunt" selected>Blunt (M = 0.65)</option>
+        <option value="Dagger">Dagger (M = 3)</option>
+      </select>
+    </label>
+
+    <label class="checkbox">
+      <input id="isAlloy" type="checkbox"/>
+      Target has Alloyblood
+    </label>
+
+    <label>
+      Ironsing investment (0–100):
+      <input id="ironsing" type="number" min="0" max="100" step="1" value="100"/>
+    </label>
+
+    <label>
+      Armor resistance (%) — reduces final blood loss:
+      <input id="armor" type="number" step="1" min="0" max="100" value="0"/>
+    </label>
+
+    <label class="checkbox">
+      <input id="cw" type="checkbox"/>
+      Target has Cauterized Wounds (~30% reduction)
+    </label>
+
+    <div class="buttons">
+      <button id="calcBtn">Calculate</button>
+      <button id="copyBtn">Copy result</button>
+    </div>
+
+    <div class="result">
+      <div>Scaled damage: <span id="scaledS">—</span></div>
+      <div>Raw blood loss: <span id="rawLoss">—</span></div>
+      <div>Final blood loss: <strong id="finalLoss">—</strong></div>
+      <div id="notes" class="notes"></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
