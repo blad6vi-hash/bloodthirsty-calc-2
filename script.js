@@ -1,14 +1,14 @@
-// Attack multipliers
+
 const Multipliers = {
   Slash: 1,
   Blunt: 0.65,
   Dagger: 3
 };
 
-// Round to 2 decimals
+
 const r2 = x => Math.round(x * 100) / 100;
 
-// Formulas
+
 function baseFormula(S, M){
   return 0.1 * S * M + (0.1 * S + 3) * (0.9 + 0.1 * M);
 }
@@ -21,14 +21,14 @@ function alloyFormula(S, M){
   return 0.1 * S * M * 0.25 + (0.1 * S + 3) * (0.9 + 0.25 * (2 - M) + 0.1 * M);
 }
 
-// Alloyblood FINAL reduction (post-formula)
+
 function alloyReduction(ironsing){
   ironsing = Math.max(0, Math.min(100, ironsing));
   const reduction = 0.75 - 0.0075 * (100 - ironsing);
-  return 1 - reduction; // multiplier
+  return 1 - reduction; 
 }
 
-// Calculate everything
+
 function calculate(baseDamage, attackType, isAlloy, ironsing, armor, cw){
   const S = baseDamage * 1.1;
   const M = Multipliers[attackType];
@@ -47,18 +47,18 @@ function calculate(baseDamage, attackType, isAlloy, ironsing, armor, cw){
     label = "Standard formula";
   }
 
-  // Post-formula reductions
+
   let final = raw;
 
-  // Armor resistance
+ 
   final *= (1 - armor / 100);
 
-  // Alloyblood target reduction
+  
   if(isAlloy){
     final *= alloyReduction(ironsing);
   }
 
-  // Cauterized Wounds
+
   if(cw){
     final *= 0.70;
   }
@@ -67,7 +67,7 @@ function calculate(baseDamage, attackType, isAlloy, ironsing, armor, cw){
 }
 
 
-// UI
+
 document.getElementById("calcBtn").addEventListener("click", ()=>{
   const baseDamage = parseFloat(document.getElementById("baseDamage").value);
   const attackType = document.getElementById("attackType").value;
